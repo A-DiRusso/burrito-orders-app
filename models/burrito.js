@@ -33,7 +33,7 @@ class Burrito {
                         burritoData.id,
                         burritoData.name,
                         burritoData.style,
-                        burritoData.size
+                        burritoData.heat
                     );
                     console.log(aBurritoOrder);
                     return aBurritoOrder;

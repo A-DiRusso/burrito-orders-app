@@ -1,10 +1,10 @@
 const db = require('./conn');
 
 class Burrito {
-    constructor(id, name, order, heat) {
+    constructor(id, name, style, heat) {
         this.id = id;
         this.name = name;
-        this.order = order;
+        this.style = style;
         this.heat = heat;
     }
 
@@ -13,9 +13,10 @@ class Burrito {
             .then((burritoData) => {
                 const burritoInstance = new Burrito(burritoData.id,
                                                     burritoData.name,
-                                                    burritoData.order,
+                                                    burritoData.style,
                                                     burritoData.heat
                                                    );
+                
                 return burritoInstance;
             })
             .catch(() => {
@@ -23,11 +24,28 @@ class Burrito {
             })
 
     }
+
+    static getAll() {
+        return db.any(`select * from burrito`)
+            .then((arrayOfBurritoData) => {
+                return arrayOfBurritoData.map((burritoData) =>{
+                    const aBurritoOrder = new Burrito(
+                        burritoData.id,
+                        burritoData.name,
+                        burritoData.style,
+                        burritoData.size
+                    );
+                    console.log(aBurritoOrder);
+                    return aBurritoOrder;
+                });
+            })
+    }
+
     save() {
         return db.result(`
         update coffee set
         name=${this.name},
-        order=${this.order},
+        style=${this.style},
         heat=${this.heat},
     where id=${this.id}
         `)

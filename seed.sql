@@ -1,5 +1,5 @@
-insert into burrito-orders
-        (name, order, heat)
+insert into burrito
+        (name, style, heat)
 values
     ('Beth', 'Vegan', 'lava'),
     ('Bob', 'Vegitarian', 'mild'),
